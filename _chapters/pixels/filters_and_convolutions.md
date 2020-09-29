@@ -71,7 +71,10 @@ g[n,m]=\frac{1}{9}\sum_{k=n-1}^{n+1}\sum_{l=n-1}^{n+1}f[k,l]
 =\frac{1}{9}\sum_{k=-1}^{1}\sum_{l=-1}^{1}f[n-k,m-l]
 $$
 Filter result:
-![](https://i.imgur.com/4TmuGop.png)
+<div class="fig figcenter fighighlight">
+  <img width="700" src="https://i.imgur.com/4TmuGop.png">
+</div>
+
 The second example is **image segmentation**.
 Base on a simple threshold, we are able to get
 $$
@@ -81,7 +84,9 @@ g[n,m] =  \left\{\begin{matrix}
 \end{matrix}\right.
 $$
 Filter result:
-![](https://i.imgur.com/BnzITX5.png)
+<div class="fig figcenter fighighlight">
+  <img width="700" src="https://i.imgur.com/BnzITX5.png">
+</div>
 
 
 <a name='Topic 4'></a>
