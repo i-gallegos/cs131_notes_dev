@@ -201,13 +201,11 @@ An example of the 3x3 case is shown below:
 
 An LSI system is completely specified by its impulse response.  This means that for any input $f$, we can compute the output $g$ in terms of the impulse response $h$:
 
-$
-\begin{align}
-f[n,m]&\xrightarrow{S}g[n,m] \\
-f[n,m]&=\sum_{k = -\infty}^\infty \sum_{l = -\infty}^\infty f[k,l] \cdot \delta_2[n-k, m-l]\\
-&\xrightarrow{S}\sum_{k = -\infty}^\infty \sum_{l = -\infty}^\infty f[k,l] \cdot S\{\delta_2[n-k, m-l]\}
-\end{align}
-$
+$$f[n,m]\xrightarrow{S}g[n,m] $$
+
+$$f[n,m]=\sum_{k = -\infty}^\infty \sum_{l = -\infty}^\infty f[k,l] \cdot \delta_2[n-k, m-l]$$
+
+$$\xrightarrow{S}\sum_{k = -\infty}^\infty \sum_{l = -\infty}^\infty f[k,l] \cdot S\{\delta_2[n-k, m-l]\}$$
 
 By the shift invariance property, we know that 
 
