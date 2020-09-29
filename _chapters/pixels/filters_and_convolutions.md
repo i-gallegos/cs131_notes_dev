@@ -53,23 +53,29 @@ f(x, y) = \Big[r(x, y) \\
 ## Systems and Filters
 We define a system as a unit that converts an input function $f[n,m]$ into an
 output function $g[n,m]$, where $[n, m]$ are the independent variables. In the case of images, $[n, m]$ represents the **spatial position** in the image.
+
 $$
 f[n,m]\xrightarrow{System S}g[n,m]
 $$
+
 $S$ is the **system operator** defined as a mapping/assignment that transforms the
 input $f$ into the output $g$.
+
 $$
 g = S[f], g[n,m] = S\{f[n,m]\}
 \\
 f[n,m]\xrightarrow{S}g[n,m]
 $$
+
 Now let's look at two examples.
 The first example is **moving average**, which uses a 2D moving average over a 3 × 3 neighborhood window. This filter "transforms" each pixel value into the average value of its neighborhood and achieves smoothing effect on the image.
+
 $$
 g[n,m]=\frac{1}{9}\sum_{k=n-1}^{n+1}\sum_{l=n-1}^{n+1}f[k,l]
 \\
 =\frac{1}{9}\sum_{k=-1}^{1}\sum_{l=-1}^{1}f[n-k,m-l]
 $$
+
 Filter result:
 <div class="fig figcenter fighighlight">
   <img width="700" src="https://i.imgur.com/4TmuGop.png">
@@ -77,12 +83,14 @@ Filter result:
 
 The second example is **image segmentation**.
 Base on a simple threshold, we are able to get
+
 $$
 g[n,m] =  \left\{\begin{matrix}
 255 & f[n,m]>100\\ 
 0 & \text{otherwise.} 
 \end{matrix}\right.
 $$
+
 Filter result:
 <div class="fig figcenter fighighlight">
   <img width="700" src="https://i.imgur.com/BnzITX5.png">
@@ -112,10 +120,30 @@ Let's take a look at the properties of the Moving Average System introduced abov
 
 
 ***Is the moving average system shift invariant?*** Yes!
-To see this, we start with passing $f$ through our system $S$ to obtain $g$, as before: $$f[n,m]\xrightarrow{S}g[n,m]$$ We also know that in the case of the moving average system, $g$ can be written down as: $$g[n, m] = \frac{1}{9}\sum_{k=n-1}^{n+1}\sum_{l=m-1}^{m+1}f[k,l] = \frac{1}{9}\sum_{k=-1}^{1}\sum_{l=-1}^{1}f[n-k,m-l]$$ Now, passing in the shifted version of $f$, $$f[n - n_0, m - m_0]\xrightarrow{S}\frac{1}{9}\sum_{k=-1}^{1}\sum_{l=-1}^{1}f[(n-n_0)-k, (m-m_0)-l]$$ we note that we get a shifted version of $g$, $g[n-n_0, m-m_0]$, that is shifted by exactly the same amount.
+To see this, we start with passing $f$ through our system $S$ to obtain $g$, as before: $$f[n,m]\xrightarrow{S}g[n,m]$$ We also know that in the case of the moving average system, $g$ can be written down as: 
+
+$$g[n, m] = \frac{1}{9}\sum_{k=n-1}^{n+1}\sum_{l=m-1}^{m+1}f[k,l] = \frac{1}{9}\sum_{k=-1}^{1}\sum_{l=-1}^{1}f[n-k,m-l]$$ 
+
+Now, passing in the shifted version of $f$, 
+
+$$f[n - n_0, m - m_0]\xrightarrow{S}\frac{1}{9}\sum_{k=-1}^{1}\sum_{l=-1}^{1}f[(n-n_0)-k, (m-m_0)-l]$$ 
+
+we note that we get a shifted version of $g$, $g[n-n_0, m-m_0]$, that is shifted by exactly the same amount.
 
 ***Is the moving average system a linear system?*** Yes!
-To see this, we take an image $f[x, y] = \alpha f_i[n, m] + \beta f_j[k, l]$, and note that since $$S[f[x, y]] = \frac{1}{9}\sum_{a=x-1}^{x+1}\sum_{b=y-1}^{y+1}f[a, b] $$ we can split this into $$= \frac{1}{9}\sum_{a=n-1}^{n+1}\sum_{b=m-1}^{m+1}\alpha f_i[a, b] + \frac{1}{9}\sum_{a=k-1}^{k+1}\sum_{b=l-1}^{l+1}\beta f_j[a, b]$$ $$ = \alpha (\frac{1}{9}\sum_{a=n-1}^{n+1}\sum_{b=m-1}^{m+1}f_i[a, b]) + \beta (\frac{1}{9}\sum_{a=k-1}^{k+1}\sum_{b=l-1}^{l+1}f_j[a, b])$$ $$= \alpha S[f_i[n, m]] + \beta S[f_j[k, l]]$$ which fulfills the superposition property. 
+To see this, we take an image $f[x, y] = \alpha f_i[n, m] + \beta f_j[k, l]$, and note that since 
+
+$$S[f[x, y]] = \frac{1}{9}\sum_{a=x-1}^{x+1}\sum_{b=y-1}^{y+1}f[a, b] $$
+
+we can split this into 
+
+$$= \frac{1}{9}\sum_{a=n-1}^{n+1}\sum_{b=m-1}^{m+1}\alpha f_i[a, b] + \frac{1}{9}\sum_{a=k-1}^{k+1}\sum_{b=l-1}^{l+1}\beta f_j[a, b]$$
+
+$$ = \alpha (\frac{1}{9}\sum_{a=n-1}^{n+1}\sum_{b=m-1}^{m+1}f_i[a, b]) + \beta (\frac{1}{9}\sum_{a=k-1}^{k+1}\sum_{b=l-1}^{l+1}f_j[a, b])$$
+
+$$= \alpha S[f_i[n, m]] + \beta S[f_j[k, l]]$$ 
+
+which fulfills the superposition property. 
 
 ***Is the thresholding system a linear system?*** No! 
 Note that we can have $f_i[n, m] + f_j[n, m] > T$ when both $f_i[n, m] < T$ and $f_j[n, m] < T$. 
@@ -139,6 +167,7 @@ $$
 LSI systems have important applications in computer vision.  One example of an LSI system is the moving average filter.
 
 How does an LSI system act on an input image $f$?  To understand this, we can analyze the impulse response.  For a two-dimensional image, there is a single impulse at the origin, and the impulse function $\delta_2$ is given by:
+
 $$
 \delta_2 = \left\{\begin{matrix}
 1 & \text{at }[0,0]\\ 
@@ -151,16 +180,20 @@ $$
 </div>
 
 We can pass in an impulse function into the LSI system and record its response:
+
 $$
 \delta_2[n,m]\xrightarrow{S}h[n,m]
 $$
+
 where $\delta_2$ is an impulse function and $h$ is the response.
 
 
 The key idea is that an image $f$ can be represented as a sum of impulses:
+
 $$
 f[n,m] = \sum_{k = -\infty}^\infty \sum_{l = -\infty}^\infty f[k,l] \cdot \delta_2[n-k, m-l]
 $$
+
 An example of the 3x3 case is shown below:
 <div class="fig figcenter fighighlight">
   <img width="700" src="https://i.imgur.com/bdsQ7IS.jpg">
@@ -178,29 +211,38 @@ S\{\delta_2[n-k, m-l]\} = h[n-k,m-l]
 $$
 
 Therefore,
+
 $$
 f[n,m]\xrightarrow{S}\sum_{k = -\infty}^\infty \sum_{l = -\infty}^\infty f[k,l] \cdot h[n-k, m-l]
 $$
+
 This can also be written as 
+
 $$
 f[n,m] * h[n,m] = \sum_{k = -\infty}^\infty \sum_{l = -\infty}^\infty f[k,l] \cdot h[n-k, m-l]
 $$
+
 which is known as a *discrete convolution*.
 
 **Example.**  We can understand how LSI systems relate to the impulse response with an example of a 3x3 moving average filter.  Recall that the 3x3 moving average filter is given by:
+
 $$
 f[n,m]\xrightarrow{s}\frac{1}{9}\sum_{k=-1}^1 \sum_{l=-1}^1 f[n-k, m-l]
 $$
+
 From this, we have the following as an expression for the impulse response:
+
 $$
 \delta_2[n,m]\xrightarrow{s}h[n,m] = \frac{1}{9}\sum_{k=-1}^1 \sum_{l=-1}^1 \delta_2[n-k, m-l]
 $$
+
 If we calculate the values for $n = -2, \cdots, 2$ and $m = -2, \cdots, 2$, we get the following:
 <div class="fig figcenter fighighlight">
   <img width="275" src="https://i.imgur.com/FHdfNNf.jpg">
 </div>
 
 This can be represented by the matrix:
+
 $$
 \begin{bmatrix}
 \frac{1}{9} & \frac{1}{9} & \frac{1}{9}\\ 
@@ -256,6 +298,7 @@ $$
 f[n,m]**h[n,m]= \sum_{k = -\infty}^\infty \sum_{l = -\infty}^\infty f[k,l] \cdot h[n+k, m+l]
 \end{align}
 $$
+
 Below, we see the slight but important distinctions between convolution and cross-correlation. Note how the lack of flipping mirrors our convuluted signal output.
 <div class="fig figcenter fighighlight">
   <img width="275" src="https://i.imgur.com/9c3DUab.png">
