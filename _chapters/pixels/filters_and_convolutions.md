@@ -3,7 +3,6 @@ title: Filters and convolutions
 keywords: systems, convolution, correlation
 order: 3
 ---
-# Filters and Convolutions
 
 Table of contents:
 
