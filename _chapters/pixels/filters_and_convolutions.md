@@ -106,7 +106,10 @@ Examples of Spatial Properties include:
 3. Shift Invariance: given a system $S$, $$f[n,m]\xrightarrow{S}g[n,m],$$ we say $S$ is **shift invariant** if $$f[n - n_0,m - m_0]\xrightarrow{S}g[n - n_0,m - m_0]$$ for every input image $[n, m]$ and shifts $n_0$, $m_0$. Essentially, this means that if we shift the input $f$ by a given amount, then our output will be shifted by the same amount. In the context of an image, shifting entails moving an image in the cartesian plane. 
 
 Let's take a look at the properties of the Moving Average System introduced above. 
-![](https://i.imgur.com/SsCDScD.png)
+<div class="fig figcenter fighighlight">
+  <img width="700" src="https://i.imgur.com/SsCDScD.pngg">
+</div>
+
 
 ***Is the moving average system shift invariant?*** Yes!
 To see this, we start with passing $f$ through our system $S$ to obtain $g$, as before: $$f[n,m]\xrightarrow{S}g[n,m]$$ We also know that in the case of the moving average system, $g$ can be written down as: $$g[n, m] = \frac{1}{9}\sum_{k=n-1}^{n+1}\sum_{l=m-1}^{m+1}f[k,l] = \frac{1}{9}\sum_{k=-1}^{1}\sum_{l=-1}^{1}f[n-k,m-l]$$ Now, passing in the shifted version of $f$, $$f[n - n_0, m - m_0]\xrightarrow{S}\frac{1}{9}\sum_{k=-1}^{1}\sum_{l=-1}^{1}f[(n-n_0)-k, (m-m_0)-l]$$ we note that we get a shifted version of $g$, $g[n-n_0, m-m_0]$, that is shifted by exactly the same amount.
