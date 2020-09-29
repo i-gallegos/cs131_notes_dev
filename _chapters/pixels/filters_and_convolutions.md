@@ -107,7 +107,7 @@ Examples of Spatial Properties include:
 
 Let's take a look at the properties of the Moving Average System introduced above. 
 <div class="fig figcenter fighighlight">
-  <img width="700" src="https://i.imgur.com/SsCDScD.pngg">
+  <img width="600" src="https://i.imgur.com/SsCDScD.pngg">
 </div>
 
 
